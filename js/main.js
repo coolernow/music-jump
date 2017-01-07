@@ -58,6 +58,9 @@ function create(){
   player.body.bounce.y = 0.2; 
   player.body.gravity.y = 600; 
 
+  scoreText = game.add.text(16, 16, 'score: 0', { fontsize: '32px', fill: '#000'});
+
+
 };
 
 function update(){
@@ -78,6 +81,17 @@ function update(){
 		game.physics.arcade.enable(obstacle);
 		obstacle.body.immovable = true; 
 	}
+
+	if (obstacle.x < 5 && player.x > 5){
+		score++;
+		scoreText.text = 'score: ' + score; 
+	}
+	if (player.x <0){
+		scoreText = game.add.text(350,200, 'you Lose!', {fill: '#ff0000'}); 
+		obstacle.kill();
+		player.kill(); 
+
+	};
 };
 
 var game = new Phaser.Game(800, 600, Phaser.AUTO, 'gameDiv', { preload: preload, update: update, create: create });
