@@ -31,19 +31,41 @@ function create(){
   player = game.add.sprite(game.width/8, game.world.height*(7/8), 'player');
 
   //This creates the first obstacle on the right side of the screen.
+ 
   obstacle = game.add.sprite(700,game.world.height, 'obstacle');
   obstacle.scale.setTo(1,0.2);
   obstacle.anchor.setTo(0,1);
+  
   game.stage.backgroundColor = "#3498db";
+  
   platforms = game.add.group();
   platforms.enableBody = true; 
+  
   ground = platforms.create(0, GAME_HEIGHT, 'ground');
   ground.anchor.setTo(0,1); 
   ground.scale.setTo(4,1); 
+  
+  game.physics.startSystem(Phaser.Physics.ARCADE); 
+  game.physics.arcade.enable(player); 
+ 
+ game.physics.arcade.enable(ground);
+  ground.body.immovable = true; 
+  game.physics.arcade.enable(obstacle);
+  obstacle.body.immovable = true; 
+
+  spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR); 
+
+  player.body.bounce.y = 0.2; 
+  player.body.gravity.y - 600; 
 
 };
 
 function update(){
+	game.physics.arcade.collide(player, ground);
+	game.physics.arcade.collide(player, obstacle);
+	if (spaceKey.isdown && player.body.touching.down) {
+		player.body.velocity.y = -300;
+	}
 
 };
 
