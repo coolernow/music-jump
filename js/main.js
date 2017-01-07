@@ -56,15 +56,19 @@ function create(){
   spaceKey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR); 
 
   player.body.bounce.y = 0.2; 
-  player.body.gravity.y - 600; 
+  player.body.gravity.y = 600; 
 
 };
 
 function update(){
 	game.physics.arcade.collide(player, ground);
 	game.physics.arcade.collide(player, obstacle);
-	if (spaceKey.isdown && player.body.touching.down) {
+	if (spaceKey.isDown && player.body.touching.down) {
 		player.body.velocity.y = -300;
+	}
+
+	if (obstacle.x > 600) {
+		obstacle.x -= 0.05; 
 	}
 
 };
