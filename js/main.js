@@ -34,7 +34,13 @@ function create(){
   obstacle = game.add.sprite(700,game.world.height, 'obstacle');
   obstacle.scale.setTo(1,0.2);
   obstacle.anchor.setTo(0,1);
-  game.stage.backgroundColor = "#3498db"
+  game.stage.backgroundColor = "#3498db";
+  platforms = game.add.group();
+  platforms.enableBody = true; 
+  ground = platforms.create(0, GAME_HEIGHT, 'ground');
+  ground.anchor.setTo(0,1); 
+  ground.scale.setTo(4,1); 
+
 };
 
 function update(){
